@@ -7,12 +7,22 @@
 //
 
 #import "CXAppDelegate.h"
+#import "MainModuleAPI.h"
+#import "CXComponentManager.h"
+#import "CXModuleAProtocol.h"
+#import "CXViewController.h"
 
 @implementation CXAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    UITabBarController *rootVC = [MainModuleAPI rootTabBarCcontroller];
+    [MainModuleAPI addChildVC:[CXViewController new] normalImageName:@"tabbar_sound_n" selectedImageName:@"tabbar_sound_h" isRequiredNavController:YES];
+    [MainModuleAPI addChildVC:[CXComponentManager viewControllerForURL:[NSURL URLWithString:@"cxScheme://ModuleA"]] normalImageName:@"tabbar_find_n" selectedImageName:@"tabbar_find_h" isRequiredNavController:YES];
+    [MainModuleAPI setNavBarGlobalBackGroundImage:[UIImage imageNamed:@"navigationbar_bg_64"]];
+    [MainModuleAPI setNavBarGlobalTextColor:[UIColor redColor] andFontSize:18];
+    self.window.rootViewController = rootVC;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

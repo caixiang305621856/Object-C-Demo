@@ -1,0 +1,6 @@
+framework module Object_C_Demo {
+  umbrella header "Object-C-Demo-umbrella.h"
+
+  export *
+  module * { export * }
+}
