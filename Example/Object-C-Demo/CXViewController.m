@@ -11,6 +11,9 @@
 #import "CXModuleAProtocol.h"
 #import "Object_C_Demo_Example-Swift.h"
 
+
+#import "CXRunLoopViewController.h"
+
 NSString * const kCellIdentifier = @"kCellIdentifier";
 
 @interface CXViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -68,7 +71,8 @@ NSString * const kCellIdentifier = @"kCellIdentifier";
     }
     
     if (indexPath.row == 2) {
-
+        CXRunLoopViewController *runLoop = [[CXRunLoopViewController alloc] init];
+        [self.navigationController pushViewController:runLoop animated:YES];
     }
     
     if (indexPath.row == 3) {
@@ -108,7 +112,7 @@ NSString * const kCellIdentifier = @"kCellIdentifier";
 - (NSArray *)dataSource
 {
     if (_dataSource == nil) {
-        _dataSource = @[@"block本质",@"swift"];
+        _dataSource = @[@"block本质",@"swift",@"RunLoop"];
     }
     return _dataSource;
 }
