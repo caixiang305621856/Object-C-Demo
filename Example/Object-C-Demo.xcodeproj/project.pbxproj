@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5A00A0EB2670A28000F2C08B /* LeedCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A00A0E82670A28000F2C08B /* LeedCode.swift */; };
+		5AB402302682D80100B2FF2A /* UIViewController+VCProfiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB4022F2682D80100B2FF2A /* UIViewController+VCProfiler.m */; };
+		5AB4023526830E7A00B2FF2A /* KVODictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB4023326830E7A00B2FF2A /* KVODictionary.m */; };
 		5AF9BB152672F8FD00B2215E /* CXModuleADetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF9BADD2672F8FC00B2215E /* CXModuleADetailViewController.m */; };
 		5AF9BB162672F8FD00B2215E /* CXModuleA.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF9BADE2672F8FC00B2215E /* CXModuleA.m */; };
 		5AF9BB172672F8FD00B2215E /* CXModuleADetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AF9BAE02672F8FC00B2215E /* CXModuleADetailViewController.xib */; };
@@ -77,6 +79,10 @@
 		37C22C398593E9D51D56E604 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		5A00A0E72670A27E00F2C08B /* Object-C-Demo_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Object-C-Demo_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A00A0E82670A28000F2C08B /* LeedCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeedCode.swift; sourceTree = "<group>"; };
+		5AB4022E2682D80000B2FF2A /* UIViewController+VCProfiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+VCProfiler.h"; sourceTree = "<group>"; };
+		5AB4022F2682D80100B2FF2A /* UIViewController+VCProfiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+VCProfiler.m"; sourceTree = "<group>"; };
+		5AB4023326830E7A00B2FF2A /* KVODictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVODictionary.m; sourceTree = "<group>"; };
+		5AB4023426830E7A00B2FF2A /* KVODictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVODictionary.h; sourceTree = "<group>"; };
 		5AF9BADB2672F8FC00B2215E /* CXModuleA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXModuleA.h; sourceTree = "<group>"; };
 		5AF9BADC2672F8FC00B2215E /* CXModuleADetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXModuleADetailViewController.h; sourceTree = "<group>"; };
 		5AF9BADD2672F8FC00B2215E /* CXModuleADetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXModuleADetailViewController.m; sourceTree = "<group>"; };
@@ -346,6 +352,10 @@
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
+				5AB4023426830E7A00B2FF2A /* KVODictionary.h */,
+				5AB4023326830E7A00B2FF2A /* KVODictionary.m */,
+				5AB4022E2682D80000B2FF2A /* UIViewController+VCProfiler.h */,
+				5AB4022F2682D80100B2FF2A /* UIViewController+VCProfiler.m */,
 				5AF9BB3B2673091100B2215E /* CXBaseViewController.h */,
 				5AF9BB3C2673091100B2215E /* CXBaseViewController.m */,
 				5AF9BB38267308AE00B2215E /* OC底层 */,
@@ -664,6 +674,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AB402302682D80100B2FF2A /* UIViewController+VCProfiler.m in Sources */,
 				5AF9BB3D2673091100B2215E /* CXBaseViewController.m in Sources */,
 				5AF9BB352672F8FD00B2215E /* CXComponentManager.m in Sources */,
 				5AF9BB182672F8FD00B2215E /* NSObject+CXBundle.m in Sources */,
@@ -679,6 +690,7 @@
 				6003F59E195388D20070C39A /* CXAppDelegate.m in Sources */,
 				5AF9BB4426730B9400B2215E /* CXRunLoopViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* CXViewController.m in Sources */,
+				5AB4023526830E7A00B2FF2A /* KVODictionary.m in Sources */,
 				5AF9BB1F2672F8FD00B2215E /* CXNavBar.m in Sources */,
 				5A00A0EB2670A28000F2C08B /* LeedCode.swift in Sources */,
 				5AF9BB1C2672F8FD00B2215E /* UIImage+CXImage.m in Sources */,

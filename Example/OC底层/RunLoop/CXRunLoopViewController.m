@@ -53,6 +53,15 @@ static void runLoopObserverCallBack (CFRunLoopObserverRef observer, CFRunLoopAct
  通知Observers 即将处理Times
  通知Observers 即将处理Sources
  
+ typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
+     kCFRunLoopEntry = (1UL << 0), 1
+     kCFRunLoopBeforeTimers = (1UL << 1), 2
+     kCFRunLoopBeforeSources = (1UL << 2), 4
+     kCFRunLoopBeforeWaiting = (1UL << 5), 32
+     kCFRunLoopAfterWaiting = (1UL << 6), 64
+     kCFRunLoopExit = (1UL << 7), 128
+     kCFRunLoopAllActivities = 0x0FFFFFFFU
+ };
  
  */
 
@@ -62,7 +71,7 @@ static void runLoopObserverCallBack (CFRunLoopObserverRef observer, CFRunLoopAct
     CFRunLoopRef runLoopRef = CFRunLoopGetMain();
     CFRunLoopObserverRef runLoopObserverRef = CFRunLoopObserverCreate(
                                                                       CFAllocatorGetDefault(),
-                                                                      kCFRunLoopEntry | kCFRunLoopBeforeWaiting |kCFRunLoopAfterWaiting,
+                                                                      kCFRunLoopAllActivities,
                                                                       true,
                                                                       0xFFFFFF, //设置优先级低于CATransaction(2000000)
                                                                       runLoopObserverCallBack,
@@ -76,17 +85,49 @@ static void runLoopObserverCallBack (CFRunLoopObserverRef observer, CFRunLoopAct
     CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopCommonModes, ^{
         NSLog(@"=====");
     });
+    
+    
+    self.view.backgroundColor = [UIColor redColor];
+    NSLog(@"-----------viewDidLoad---------------");
+    
+    UIView *aView = [[UIView alloc] init];
+    UIView *bView = [[UIView alloc] init];
+    aView.backgroundColor = [UIColor grayColor];
+    bView.backgroundColor = [UIColor blueColor];
+
+    [self.view addSubview:aView];
+    [aView addSubview:bView];
+    
+    aView.layer.anchorPoint = CGPointMake(0, 0);
+    aView.transform = CGAffineTransformMakeScale(2, 2);
+    aView.frame = CGRectMake(100, 100, 100, 100);
+    bView.frame = CGRectMake(0, 0, 50, 50);
+    NSLog(@"bounds %@ -- bounds %@",NSStringFromCGRect(aView.bounds),NSStringFromCGRect(bView.bounds));
+    NSLog(@"frame %@ -- frame %@",NSStringFromCGRect(aView.frame),NSStringFromCGRect(bView.frame));
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"-----------viewWillAppear---------------");
+    NSLog(@"%@",[NSRunLoop currentRunLoop]);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"-----------viewDidAppear---------------");
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     NSLog(@"-touchesBegan--");
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"-dispatch_async--");
-    });
+    self.view.backgroundColor = [UIColor grayColor];
     NSLog(@"-touchesBeganEnd--");
-
 }
 
+
+int sum(int n) {
+    if (n == 1) return 1;
+    return sum(n - 1) + n;
+}
 
 @end
