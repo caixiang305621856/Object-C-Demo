@@ -25,7 +25,13 @@
         [allK replaceObjectAtIndex:idx withObject:aKey];
     } else {
         [allK addObject:aKey];
-    }         
+    }
+}
+
+- (void)removeObjectForKey:(id)aKey {
+    NSMutableArray *allK = [self mutableArrayValueForKey:@"allKeys"];
+    if ([allK containsObject:aKey]) {
+        [self.dictionary removeObjectForKey:aKey];
         [allK removeObject:aKey];
     }
 }

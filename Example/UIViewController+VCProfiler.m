@@ -61,9 +61,9 @@ static void pmy_viewDidLoad(UIViewController *kvo_self, SEL _sel) {
 
     void (*func)(UIViewController *, SEL) = (void (*)(UIViewController *, SEL))origin_imp;
 
-    VCLog(@"VC: %@ -viewDidLoad \t\tbegin  at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
+//    VCLog(@"VC: %@ -viewDidLoad \t\tbegin  at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
     func(kvo_self, _sel);
-    VCLog(@"VC: %@ -viewDidLoad \t\tfinish at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
+//    VCLog(@"VC: %@ -viewDidLoad \t\tfinish at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
 }
 
 static void pmy_viewWillAppear(UIViewController *kvo_self, SEL _sel, BOOL animated) {
@@ -75,9 +75,9 @@ static void pmy_viewWillAppear(UIViewController *kvo_self, SEL _sel, BOOL animat
 
     void (*func)(UIViewController *, SEL, BOOL) = (void (*)(UIViewController *, SEL, BOOL))origin_imp;
 
-    VCLog(@"VC: %@ -viewWillAppear \tbegin  at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
+//    VCLog(@"VC: %@ -viewWillAppear \tbegin  at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
     func(kvo_self, _sel, animated);
-    VCLog(@"VC: %@ -viewWillAppear \tfinish at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
+//    VCLog(@"VC: %@ -viewWillAppear \tfinish at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
 }
 
 static void pmy_viewDidAppear(UIViewController *kvo_self, SEL _sel, BOOL animated) {
@@ -88,9 +88,9 @@ static void pmy_viewDidAppear(UIViewController *kvo_self, SEL _sel, BOOL animate
 
     void (*func)(UIViewController *, SEL, BOOL) = (void (*)(UIViewController *, SEL, BOOL))origin_imp;
 
-    VCLog(@"VC: %@ -viewDidAppear \tbegin  at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
+//    VCLog(@"VC: %@ -viewDidAppear \tbegin  at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
     func(kvo_self, _sel, animated);
-    VCLog(@"VC: %@ -viewDidAppear \tfinish at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
+//    VCLog(@"VC: %@ -viewDidAppear \tfinish at CF time:\t%lf", kvo_self, CFAbsoluteTimeGetCurrent());
 }
 
 
@@ -183,8 +183,6 @@ static void pmy_viewDidAppear(UIViewController *kvo_self, SEL _sel, BOOL animate
     class_addMethod(kvoCls, @selector(viewDidLoad), (IMP)pmy_viewDidLoad, originViewDidLoadEncoding);
     class_addMethod(kvoCls, @selector(viewDidAppear:), (IMP)pmy_viewDidAppear, originViewDidAppearEncoding);
     class_addMethod(kvoCls, @selector(viewWillAppear:), (IMP)pmy_viewWillAppear, originViewWillAppearEncoding);
-    
-    //OC 方法和C语言的函数相互hook 主要是 IMP（ void(*fun)void   fun()  ）更换
 }
 
 + (void)swizzleMethodInClass:(Class) class originalMethod:(SEL)originalSelector swizzledSelector:(SEL)swizzledSelector

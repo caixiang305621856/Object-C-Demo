@@ -14,6 +14,9 @@
     2.性能优化
     3.监控卡顿
  */
+
+@property (strong, nonatomic) NSThread *thread;
+
 @end
 
 @implementation CXRunLoopViewController
@@ -67,44 +70,78 @@ static void runLoopObserverCallBack (CFRunLoopObserverRef observer, CFRunLoopAct
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.thread = [[NSThread alloc] initWithBlock:^{
+//        NSTimer *time = [NSTimer timerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+//            NSLog(@"123");
+//        }];
+//        [[NSRunLoop currentRunLoop] run];
+//        [[NSRunLoop currentRunLoop] addTimer:time forMode:NSDefaultRunLoopMode];
+//    }];
+//    [self.thread start];
+//
+//    [self main];
+    
+//    NSRunLoop *loop = [NSRunLoop currentRunLoop];
+//    [loop run];
+//    [loop addPort:[NSPort new] forMode:NSDefaultRunLoopMode];
+    
+    
     // Do any additional setup after loading the view.
-    CFRunLoopRef runLoopRef = CFRunLoopGetMain();
-    CFRunLoopObserverRef runLoopObserverRef = CFRunLoopObserverCreate(
-                                                                      CFAllocatorGetDefault(),
-                                                                      kCFRunLoopAllActivities,
-                                                                      true,
-                                                                      0xFFFFFF, //设置优先级低于CATransaction(2000000)
-                                                                      runLoopObserverCallBack,
-                                                                      NULL
-                                                                      );
-    CFRunLoopAddObserver(runLoopRef, runLoopObserverRef, kCFRunLoopCommonModes);
-    CFRelease(runLoopObserverRef);
+    
+//    CFRunLoopRef runLoopRef = CFRunLoopGetMain();
+//    CFRunLoopObserverRef runLoopObserverRef = CFRunLoopObserverCreate(
+//                                                                      CFAllocatorGetDefault(),
+//                                                                      kCFRunLoopAllActivities,
+//                                                                      true,
+//                                                                      0xFFFFFF, //设置优先级低于CATransaction(2000000)
+//                                                                      runLoopObserverCallBack,
+//                                                                      NULL
+//                                                                      );
+//    CFRunLoopAddObserver(runLoopRef, runLoopObserverRef, kCFRunLoopCommonModes);
+//    CFRelease(runLoopObserverRef);
+//
+//    CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopCommonModes, ^{
+//        NSLog(@"=====");
+//    });
     
     
-    
-    CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopCommonModes, ^{
-        NSLog(@"=====");
+//    self.view.backgroundColor = [UIColor redColor];
+//    NSLog(@"-----------viewDidLoad---------------");
+//
+//    UIView *aView = [[UIView alloc] init];
+//    UIView *bView = [[UIView alloc] init];
+//    aView.backgroundColor = [UIColor grayColor];
+//    bView.backgroundColor = [UIColor blueColor];
+//
+//    [self.view addSubview:aView];
+//    [aView addSubview:bView];
+//
+//    aView.layer.anchorPoint = CGPointMake(0, 0);
+//    aView.transform = CGAffineTransformMakeScale(2, 2);
+//    aView.frame = CGRectMake(100, 100, 100, 100);
+//    bView.frame = CGRectMake(0, 0, 50, 50);
+//    NSLog(@"bounds %@ -- bounds %@",NSStringFromCGRect(aView.bounds),NSStringFromCGRect(bView.bounds));
+//    NSLog(@"frame %@ -- frame %@",NSStringFromCGRect(aView.frame),NSStringFromCGRect(bView.frame));
+
+}
+
+
+- (void)main {
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_sync(queue, ^{
+        NSLog(@"1");
+        dispatch_sync(queue, ^{
+            [self performSelector:@selector(test) withObject:nil afterDelay:0];
+        });
+        dispatch_sync(queue, ^{
+            [self performSelector:@selector(test) withObject:nil afterDelay:0];
+        });
+        NSLog(@"3");
     });
-    
-    
-    self.view.backgroundColor = [UIColor redColor];
-    NSLog(@"-----------viewDidLoad---------------");
-    
-    UIView *aView = [[UIView alloc] init];
-    UIView *bView = [[UIView alloc] init];
-    aView.backgroundColor = [UIColor grayColor];
-    bView.backgroundColor = [UIColor blueColor];
+}
 
-    [self.view addSubview:aView];
-    [aView addSubview:bView];
-    
-    aView.layer.anchorPoint = CGPointMake(0, 0);
-    aView.transform = CGAffineTransformMakeScale(2, 2);
-    aView.frame = CGRectMake(100, 100, 100, 100);
-    bView.frame = CGRectMake(0, 0, 50, 50);
-    NSLog(@"bounds %@ -- bounds %@",NSStringFromCGRect(aView.bounds),NSStringFromCGRect(bView.bounds));
-    NSLog(@"frame %@ -- frame %@",NSStringFromCGRect(aView.frame),NSStringFromCGRect(bView.frame));
-
+- (void)test {
+    NSLog(@"2");
 }
 
 - (void)viewWillAppear:(BOOL)animated {
